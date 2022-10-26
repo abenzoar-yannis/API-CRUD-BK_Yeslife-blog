@@ -1,0 +1,29 @@
+{
+  "name": "api-crud-bk_yeslife-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abenzoar-yannis/API-CRUD-BK_Yeslife-blog.git"
+  },
+  "author": "Abenzoar Yannis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abenzoar-yannis/API-CRUD-BK_Yeslife-blog/issues"
+  },
+  "homepage": "https://github.com/abenzoar-yannis/API-CRUD-BK_Yeslife-blog#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
