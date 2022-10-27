@@ -76,7 +76,23 @@ exports.modifyPost = (req, res, next) => {
 
 /* EXPORT : Logic for deleted a post */
 exports.deletePost = (req, res, next) => {
-  res.status(200).json({ message: "Route delete a Post" });
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    if (!post) {
+      return res.status(404).json({ error: "Post non trouvée !" });
+    }
+    if (post.imageUrl) {
+      const filename = post.imageUrl.split("images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.deleteOne({ _id: req.params.id })
+          .then((Post) => res.status(200).json({ message: "Post supprimée !" }))
+          .catch((error) => res.status(403).json({ error }));
+      });
+    } else {
+      Post.deleteOne({ _id: req.params.id })
+        .then((Post) => res.status(200).json({ message: "Post supprimée !" }))
+        .catch((error) => res.status(403).json({ error }));
+    }
+  });
 };
 
 /* EXPORT : Logic for like or dislike a post */

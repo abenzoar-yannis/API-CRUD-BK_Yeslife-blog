@@ -4,13 +4,13 @@ API CRUD pour la gestion des articles pour le Blog de BK Yeslife
 
 ## Technologies utilisées
 
-- [Node.js]
-- [Express]
-- [MongoDB-Atlas]
+- [Node.js](http://nodejs.org)
+- [Express](http://expressjs.com)
+- [MongoDB-Atlas](https://www.mongodb.com/)
 
 ## Variables d'environnement
 
--[dotenv]
+-[dotenv](https://www.npmjs.com/package/dotenv)
 Avant de lancer ce projet, vous devrez ajouter les variables d'environnement suivantes dans un fichier .env (vérifier le typage des variables dans le fichier config/dotenvConfig.js)
 
 - PORT (Configure le port d'utilisation)
@@ -46,7 +46,4 @@ nodemon server
 
 [dotenv]: https://www.npmjs.com/package/dotenv
 [jsonwebtoken]: https://www.npmjs.com/package/jsonwebtoken
-[node.js]: http://nodejs.org
-[mongodb-atlas]: https://www.mongodb.com/
-[express]: http://expressjs.com
 [//]: # "order for gitfolio"
