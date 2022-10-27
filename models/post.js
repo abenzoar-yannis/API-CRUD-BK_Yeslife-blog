@@ -1,4 +1,4 @@
-/* Ce fichier contient le schéma d'un' post, pour la base de données MongoDB Atlas */
+/* This file contains the schema of a post, for the MongoDB Atlas database */
 
 /* ----- PACKAGES IMPORT ----- */
 const mongoose = require("mongoose"); // Mongoose

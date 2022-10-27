@@ -10,9 +10,9 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
 
     jwt.verify(token, dotenvConfig.SECRET_TOKEN, (err, decoded) => {
-      req.auth = { userId: decoded.userdID };
+      req.auth = { userId: decoded.userID };
 
-      if (!req.body.userId || req.body.userId !== decoded.userdID) {
+      if (!req.body.userId || req.body.userId !== decoded.userID) {
         return res.status(401).json({ error: "Invalid ID or Token !" });
       } else {
         next();

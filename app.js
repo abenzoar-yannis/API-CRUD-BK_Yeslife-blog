@@ -5,15 +5,17 @@ the connection to the database, and the configuration of the CORS */
 const express = require("express"); // Express package
 const mongoose = require("mongoose"); // Mongoose package
 const dotenvConfig = require("./config/dotenvConfig"); // Config .env
+const fileupload = require("express-fileupload"); // Express fileupload
 
-// Express Application
-const app = express();
+const app = express(); // Express Application
+const path = require("path"); // gives access to the file path
 
 /* --- ROUTES IMPORT --- */
 const postRoutes = require("./routes/post");
 
 /* ----- MIDDLEWARE ----- */
 app.use(express.json()); // Interpretation of the request body
+app.use(fileupload());
 
 /* ----- DATABASE ----- */
 mongoose // MongoDB Atlas
@@ -39,7 +41,8 @@ app.use((req, res, next) => {
 });
 
 /* ----- ROUTES ----- */
-app.use("/api/blog", postRoutes);
+app.use("/images", express.static(path.join(__dirname, "images"))); // management of requests to the '/images' folder
+app.use("/api/post", postRoutes);
 
 /* ----- EXPORTS ----- */
 module.exports = app; // Express Application EXPORT
