@@ -1,5 +1,5 @@
 {
-  "name": "api-crud-bk_yeslife-blog",
+  "name": "api-crud-blog",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abenzoar-yannis/API-CRUD-BK_Yeslife-blog.git"
+    "url": "git+https://github.com/abenzoar-yannis/API-CRUD-blog.git"
   },
   "author": "Abenzoar Yannis",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/abenzoar-yannis/API-CRUD-BK_Yeslife-blog/issues"
+    "url": "https://github.com/abenzoar-yannis/API-CRUD-blog/issues"
   },
-  "homepage": "https://github.com/abenzoar-yannis/API-CRUD-BK_Yeslife-blog#readme",
+  "homepage": "https://github.com/abenzoar-yannis/API-CRUD-blog#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

@@ -33,9 +33,8 @@ exports.createPost = (req, res, next) => {
     const extension = MIME_TYPES[req.files.image.mimetype];
     const filename = name + Date.now() + "." + extension;
 
-    const postObject = JSON.parse(req.body.post);
     const post = new Post({
-      ...postObject,
+      ...req.body,
       imageUrl: `${req.protocol}://${req.get("host")}/images/${filename}`,
     });
 
@@ -71,7 +70,76 @@ exports.getOnePost = (req, res, next) => {
 
 /* EXPORT : Logic for modify a post */
 exports.modifyPost = (req, res, next) => {
-  res.status(200).json({ message: "Route modify a Post" });
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    // 'mine_type' dictionary, which defines the accepted file types
+    const MIME_TYPES = {
+      "image/jpg": "jpg",
+      "image/jpeg": "jpg",
+      "image/png": "png",
+    };
+
+    if (!post) {
+      res.status(404).send({ status: 404, message: "Post not find !" });
+    }
+
+    if (req._body === true) {
+      const postObject = req.body;
+      delete postObject._id;
+
+      // post modification
+      Post.updateOne(
+        { _id: req.params.id },
+        { ...postObject, _id: req.params.id }
+      )
+        .then((post) =>
+          res
+            .status(200)
+            .json({ status: 200, message: "the post has been edited !" })
+        )
+        .catch((error) => res.status(400).json(error));
+    } else if (req.files.image) {
+      // Set de file and the filename
+      const file = req.files.image;
+      const newPath = __dirname.split("controllers").join("") + "images/";
+      const name = req.files.image.name.split(" ").join("_");
+      const extension = MIME_TYPES[req.files.image.mimetype];
+      const filename = name + Date.now() + "." + extension;
+      const postObject = {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${filename}`,
+      };
+
+      // there is already a image ?
+      if (post.imageUrl) {
+        const filename = post.imageUrl.split("images/")[1];
+        fs.unlink(`images/${filename}`, (error) => {
+          if (error) {
+            throw new Error(error);
+          }
+        });
+      }
+      Post.updateOne(
+        { _id: req.params.id },
+        { ...postObject, _id: req.params.id }
+      )
+        .then(() => {
+          file.mv(`${newPath}${filename}`, (error) => {
+            if (error) {
+              res.status(500).send({
+                status: 500,
+                message: "File upload fails !",
+                error: error,
+              });
+            } else
+              res.status(200).send({
+                status: 200,
+                message: "the post and the image has been edited !",
+              });
+          });
+        })
+        .catch((error) => res.status(400).json({ status: 400, error: error }));
+    }
+  });
 };
 
 /* EXPORT : Logic for deleted a post */

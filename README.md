@@ -1,4 +1,4 @@
-# API-CRUD-BK_Yeslife-blog
+# API-CRUD-blog
 
 API CRUD pour la gestion des articles pour le Blog de BK Yeslife
 
